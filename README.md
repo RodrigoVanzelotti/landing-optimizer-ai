@@ -1,6 +1,6 @@
 # Landing Optimizer — AI Service
 
-Python FastAPI service that generates CRO suggestions from a sanitized page map
+Python FastAPI service that generates CRO (Conversion Rate Optimizer) suggestions from a sanitized page map
 and aggregate metrics. Provider-agnostic (OpenAI-compatible or a deterministic
 stub). **Never auto-publishes** — output is reviewed in the dashboard.
 
