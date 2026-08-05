@@ -24,7 +24,7 @@ proposed copy to `maxLength`, keeping AI output brand-safe.
 python -m venv .venv && . .venv/Scripts/activate   # Windows PowerShell: .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 cp .env.example .env
-uvicorn app.main:app --reload --port 8000
+uvicorn app.main:app --reload --port 8000 --no-access-log --log-config logging.json
 pytest
 ruff check .
 ```

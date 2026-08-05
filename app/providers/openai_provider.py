@@ -8,15 +8,15 @@ any failure so the service degrades gracefully.
 from __future__ import annotations
 
 import json
-import logging
 
 import httpx
 
+from app.logging_utils import Logger, clean_log_value, safe_reason
 from app.providers.base import LLMProvider
 from app.providers.stub import StubProvider
 from app.schemas import AnalyzeInput, AnalyzeResult, ScoreInput, ScoreResult, Suggestion
 
-logger = logging.getLogger(__name__)
+logger = Logger(__name__)
 
 SYSTEM_PROMPT = (
     "You are a senior conversion-rate-optimization (CRO) expert. You analyze a "
@@ -49,7 +49,11 @@ class OpenAIProvider(LLMProvider):
                 suggestions=suggestions,
             )
         except Exception as exc:  # noqa: BLE001 - degrade gracefully
-            logger.warning("OpenAI provider failed, using stub: %s", exc)
+            logger.warning("provider_fallback",
+                           reason=safe_reason(exc), 
+                           provider=self._model,
+                           fallback=self._fallback.name,
+                           user_prompt=clean_log_value(user_prompt, 2000))
             return await self._fallback.suggest(data)
 
     async def score(self, data: ScoreInput) -> ScoreResult:
