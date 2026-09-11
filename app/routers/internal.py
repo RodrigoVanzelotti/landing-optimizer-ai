@@ -10,7 +10,6 @@ from app.auth import require_internal_token
 from app.logging_utils import Logger, clean_log_value, request_id
 from app.schemas import AnalyzeInput, AnalyzeResult, ScoreInput, ScoreResult
 
-
 router = APIRouter(prefix="/internal", tags=["internal"])
 logger = Logger(__name__)
 

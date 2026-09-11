@@ -23,7 +23,8 @@ class JsonFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         output: dict[str, Any] = {
-            "timestamp": datetime.now(UTC).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
+            "timestamp": datetime.now(UTC) \
+                    .isoformat(timespec="milliseconds").replace("+00:00", "Z"),
             "level": record.levelname.lower(),
             "service": "landing-optimizer-ai",
             "logger": record.name,
