@@ -7,3 +7,4 @@ venv/
 !.env.example
 .pytest_cache/
 .ruff_cache/
+docs/fake_data/*
