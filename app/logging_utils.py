@@ -23,7 +23,9 @@ class JsonFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         output: dict[str, Any] = {
-            "timestamp": datetime.now(UTC).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
+            "timestamp": datetime.now(UTC).isoformat(timespec="milliseconds").replace(
+                "+00:00", "Z"
+            ),
             "level": record.levelname.lower(),
             "service": "landing-optimizer-ai",
             "logger": record.name,
@@ -131,11 +133,11 @@ def safe_reason(error: BaseException) -> str:
 
 
 def _json_value(value: object) -> object:
-    if value is None or isinstance(value, (bool, int, float)):
+    if value is None or isinstance(value, bool | int | float):
         return value
     if isinstance(value, str):
         return clean_log_value(value, 2000)
-    if isinstance(value, (list, tuple)):
+    if isinstance(value, list | tuple):
         return [_json_value(item) for item in value[:50]]
     if isinstance(value, dict):
         return {
