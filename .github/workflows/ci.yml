@@ -24,6 +24,6 @@ jobs:
       contents: read
       actions: read
       id-token: write
-    uses: RodrigoVanzelotti/landing-optimizer-infra/.github/workflows/deploy.yml@main
+    uses: RodrigoVanzelotti/personal-cloud-infrastructure/.github/workflows/deploy-landing-optimizer.yml@main
     with:
       component: ai
